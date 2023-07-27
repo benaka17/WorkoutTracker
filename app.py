@@ -25,12 +25,43 @@ def index():
 def track_workout():
     if request.method == "POST":
         chosen_workout = request.form.get("workouts")
-        exercise_details = workout_details(chosen_workout)
 
-        return render_template("track.html", chosen_workout=chosen_workout)
+        workout_dict = {
+            "Shoulders and Triceps": {
+                "Shoulder Press": 4,
+                "Lateral Raises": 4,
+                "Rear Delt Fly": 3,
+                "Tricep Pushdown": 4,
+                "Tricep Extensions": 4,
+            },
+            "Back": {
+                "Pull Ups": 3,
+                "Close Grip Rows": 4,
+                "Pulldowns": 3,
+                "Single Arm Machine Row": 3,
+            },
+            "Chest and Biceps": {
+                "Flat Bench Press": 3,
+                "Incline Bench Press": 3,
+                "Pec Fly": 3,
+                "Hammer Curls": 3,
+                "Barbell Curls": 3,
+            },
+            "Legs and Abs": {
+                "Leg Extensions": 2,
+                "Squats": 4,
+                "Deadlifts": 3,
+                "Machine Crunches": 3,
+                "Plank": 2,
+            }
+        }
+
+        exercise_details = workout_dict.get(chosen_workout, {})
+
+        return render_template("track.html", chosen_workout=chosen_workout, exercise_details=exercise_details)
     else:
         default_value = "None"
-        return render_template("track.html", chosen_workout=default_value)
+        return render_template("track.html", chosen_workout=default_value, exercise_details={})
 
 
 

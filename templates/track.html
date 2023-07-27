@@ -30,6 +30,21 @@
         <button class="rounded border p-2 border-black bg-cyan-400" type="submit">Submit</button>
     </form>
 
-    
+    {% if chosen_workout %}
+        <h1 class="text-2xl font-bold">Chosen workout: {{ chosen_workout }}</h1>
+        <form action="" method="post" class="gap-y-4">
+            {% for exercise, sets in exercise_details.items() %}
+                <h2 class="text-xl underline">{{ exercise }}</h2>
+                {% for set_num in range(1, sets + 1) %}
+                    <label class="my-2" for="weight_{{ exercise }}_set_{{ set_num }}">Weight for Set {{ set_num }}:</label>
+                    <input class="my-2 rounded p-2" type="number" step="any" name="weight_{{ exercise }}_set_{{ set_num }}" id="weight_{{ exercise }}_set_{{ set_num }}" class="rounded p-2">
+                    <label class="my-2" for="reps_{{ exercise }}_set_{{ set_num }}">Reps for Set {{ set_num }}:</label>
+                    <input class="my-2 rounded p-2" type="number" name="reps_{{ exercise }}_set_{{ set_num }}" id="reps_{{ exercise }}_set_{{ set_num }}" class="rounded p-2">
+                    <br>
+                {% endfor %}
+            {% endfor %}
+            <button type="submit" class="rounded border p-2 border-black bg-cyan-400">Submit</button>
+        </form>
+    {% endif %}
 </body>
 </html>
