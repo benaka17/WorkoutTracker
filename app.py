@@ -19,16 +19,16 @@ def create_db():
 # Route to render the index.html page
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/track')
+@app.route("/track")
 def track_workout():
     return render_template("track.html")
 
-@app.route('/progress')
+@app.route("/progress")
 def view_progress():
     return render_template("progress.html")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     create_db()
     app.run(debug=True)
